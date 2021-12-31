@@ -1,0 +1,71 @@
+buildscript {
+    ext {
+        springBootVersion = '2.4.5'
+        lombokVersion = '1.18.20'
+        junitVersion = '4.13.2'
+        hamcrestVersion = '2.2'
+        slf4jVersion = '1.7.30'
+        mybatisVersion = '2.1.4'
+        commonLangVersion = '3.12.0'
+        apacheHttpClientVersion = '4.5.13'
+        apacheHttpCoreVersion = '4.4.14'
+        ojdbcVersion = '11.2.0.4'
+        tilesVersion = '3.0.8'
+
+    }
+    repositories {
+        maven { url "http://mvnrepo.koreacb.com:8080/nexus/content/groups/kcb-mvn-ids/" }
+        //mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group 'kcb.ids'
+version '1.0-SNAPSHOT'
+
+repositories {
+    maven { 
+      url = uri("http://mvnrepo.koreacb.com:8080/nexus/content/groups/kcb-mvn-ids/" )
+    }
+}
+
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-devtools:${springBootVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+    implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:${mybatisVersion}"
+    implementation "org.apache.commons:commons-lang3:${commonLangVersion}"
+    implementation "org.apache.httpcomponents:httpclient:${apacheHttpClientVersion}"
+    implementation "org.apache.httpcomponents:httpcore:${apacheHttpCoreVersion}"
+    implementation "org.lazyluke:log4jdbc-remix:0.2.7"
+    implementation "com.oracle.database.jdbc:ojdbc8:19.7.0.0"
+    implementation "com.oracle.database.nls:orai18n:19.7.0.0"
+    implementation "javax.servlet:jstl:1.2"
+    implementation "org.apache.tomcat.embed:tomcat-embed-jasper:9.0.45"
+
+    implementation "org.apache.tiles:tiles-core:${tilesVersion}"
+    implementation "org.apache.tiles:tiles-servlet:${tilesVersion}"
+    implementation "org.apache.tiles:tiles-jsp:${tilesVersion}"
+    implementation "org.apache.tiles:tiles-extras:${tilesVersion}"
+
+    implementation "kcb.commons:dto:2.0.1"
+    implementation "kcb.commons:exception:1.1.4"
+
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    testImplementation "junit:junit:${junitVersion}"
+    testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+    testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
+    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    testImplementation "org.reflections:reflections:0.9.12"
+    testImplementation "com.squareup.okhttp3:okhttp:4.9.1"
+}

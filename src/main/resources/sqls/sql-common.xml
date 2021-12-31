@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="god.dag.common.mapper.CommonMapper""">
+
+    <!-- 인증알림내용등록원장(TBPS01A) 정보를 등록한다. -->
+    <insert id="insertTBNS01A" parameterType="god.dag.common.vo.TBNS01A">
+        INSERT INTO TBNS01A
+        (
+             CUST_ID
+            ,TX_ID
+            ,CHECK_DT_TM
+            ,RSPRTN_RT
+            ,SPO2_SCL_CD
+            ,SPO2_SCL1_PRCNT
+            ,SPO2_SCL2_PRCNT
+            ,AIR_OXGN_CD
+            ,SYSTLC_BLD_PRSSR
+            ,CNSCSNSS
+            ,PLS
+            ,TMPRATR
+            ,REG_DT_TM
+            ,CHNG_DT_TM
+            ,CHNG_NO
+        )
+        VALUES
+        (
+              #{cpCd, jdbcType=VARCHAR}
+            , #{txId, jdbcType=VARCHAR}
+            , to_char(SYSDATE,'yyyymmddhh24miss')
+            , #{rsprtnRt, jdbcType=VARCHAR}
+            , #{spo2SclCd, jdbcType=VARCHAR}
+            , #{spo2Scl1Prct, jdbcType=VARCHAR}
+            , #{spo2Scl2Prct, jdbcType=VARCHAR}
+            , #{airOxgnCd, jdbcType=VARCHAR}
+            , #{systlcBldPrssr, jdbcType=VARCHAR}
+            , #{pls, jdbcType=VARCHAR}
+            , #{cnscsnss, jdbcType=VARCHAR}
+            , #{tmpratr, jdbcType=VARCHAR}
+            , to_char(SYSDATE,'yyyymmddhh24miss')
+            , #{chngDtTm, jdbcType=VARCHAR}
+            , SYSDATE
+        )
+    </insert>
+	
+    <insert id="insertTBNS02A" parameterType="god.dag.common.vo.TBNS02A">
+        INSERT INTO TBNS02A
+        (
+             CUST_ID
+            ,TX_ID
+            ,CHECK_DT_TM
+            ,SCR_CD
+            ,RSPRTN_RT_SCR
+            ,SPO2_SCL2_PRCNT_SCR
+            ,SPO2_SCL2_PRCNT_SCR
+            ,AIR_OXGN_CD_SCR
+            ,SYSTLC_BLD_PRSSR_SCR
+            ,PLS_SCR
+            ,CNSCSNSS_SCR
+            ,TMPRATR_SCR
+            ,RSLT_SCORE
+            ,REG_DT_TM
+            ,CHNG_DT_TM
+            ,CHNG_NO
+        )
+        VALUES
+        (
+              #{cpCd, jdbcType=VARCHAR}
+            , #{txId, jdbcType=VARCHAR}
+            , #{scrCd, jdbcType=VARCHAR}
+            , #{rsprtnRtScr, jdbcType=VARCHAR}
+            , #{spo2Scl1PrctScr, jdbcType=VARCHAR}
+            , #{spo2Scl2PrctScr, jdbcType=VARCHAR}
+            , #{airOxgnCdScr, jdbcType=VARCHAR}
+            , #{systlcBldPrssrScr, jdbcType=VARCHAR}
+            , #{plsScr, jdbcType=VARCHAR}
+            , #{cnscsnssScr, jdbcType=VARCHAR}
+            , #{tmpratrScr, jdbcType=VARCHAR}
+            , #{rsltScr, jdbcType=VARCHAR}
+            , to_char(SYSDATE,'yyyymmddhh24miss')
+            , #{chngDtTm, jdbcType=VARCHAR}
+            , SYSDATE
+        )
+    </insert>
+    
+    <update id="updateTBNS00A" parameterType="god.dag.common.vo.TBNS00A">
+        UPDATE TBNS02A SET
+        LST_TX_ID=#{lstTxId, jdbcType=VARCHAR}
+        ,LST_CHKD_DT_TM=#{lstChkdDtTm, jdbcType=VARCHAR}
+        ,LST_SCORE=#{lstScore, jdbcType=VARCHAR}
+        WHERE CUST_ID =#{custId, jdbcType=VARCHAR}
+    </update>
+</mapper>

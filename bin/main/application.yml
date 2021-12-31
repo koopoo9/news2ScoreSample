@@ -1,0 +1,56 @@
+# bootstrap.yml 로드 완료 후 읽어들이는 설정 파일
+# 어플리케이션의 일반적인 속성을 기술한다.
+
+server:
+  port: 15001
+  servlet:
+    context-path: /
+  tomcat:
+    additional-tld-skip-patterns: "*.jar"
+
+
+spring:
+  application:
+    name: ids-sampler
+  profiles:
+    active: local
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+
+mybatis:
+  mapper-locations: mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+
+--- # local 환경
+spring:
+  profiles: local
+
+namdb:
+  datasource:
+    jdbc-url: jdbc:oracle:thin:@192.168.120.119:11540:DPINS
+    username: NAMAPP
+    password: NAM201502A!
+    driver-class-name: oracle.jdbc.OracleDriver
+
+--- # dev 환경
+spring:
+  profiles: dev
+
+namdb:
+  datasource:
+    jdbc-url: jdbc:oracle:thin:@192.168.120.113:1524:DPINS
+    username: NAMAPP
+    password: NAM201502A!
+    driver-class-name: oracle.jdbc.OracleDriver
+
+---
+spring:
+  profiles: test
+
+---
+spring:
+  profiles: prod
